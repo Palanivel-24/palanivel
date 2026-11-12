@@ -137,10 +137,10 @@ LEFT JOIN orders o ON o.restaurant_id = r.restaurant_id
 GROUP BY r.restaurant_id, r.restaurant_name
 ORDER BY r.restaurant_name;
 
--- 18. Customer lifetime value from delivered orders
+-- 18. Customer delivered spend during the sample period
 SELECT c.customer_id, c.customer_name,
-       ROUND(SUM(CASE WHEN o.status = 'delivered' THEN o.amount ELSE 0 END), 2) AS lifetime_value
+       ROUND(SUM(CASE WHEN o.status = 'delivered' THEN o.amount ELSE 0 END), 2) AS sample_period_spend
 FROM customers c
 LEFT JOIN orders o ON o.customer_id = c.customer_id
 GROUP BY c.customer_id, c.customer_name
-ORDER BY lifetime_value DESC;
+ORDER BY sample_period_spend DESC;
