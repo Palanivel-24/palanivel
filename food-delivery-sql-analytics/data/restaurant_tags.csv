@@ -1,0 +1,10 @@
+tag_id,restaurant_id,tag
+1,1,popular
+2,1,family-friendly
+3,2,vegetarian-friendly
+4,2,budget
+5,3,spicy
+6,3,popular
+7,4,premium
+8,5,healthy
+9,6,traditional
