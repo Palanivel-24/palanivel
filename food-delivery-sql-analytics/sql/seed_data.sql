@@ -1,0 +1,2 @@
+-- Synthetic source rows are maintained as CSV files in ../data.
+-- Run run_analysis.py to load the CSV files into SQLite.
