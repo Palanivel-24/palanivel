@@ -1,0 +1,13 @@
+PRAGMA foreign_keys = ON;
+DROP TABLE IF EXISTS restaurant_tags;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS restaurants;
+DROP TABLE IF EXISTS customers;
+CREATE TABLE customers (customer_id INTEGER PRIMARY KEY, customer_name TEXT NOT NULL, city TEXT NOT NULL, signup_date TEXT NOT NULL);
+CREATE TABLE restaurants (restaurant_id INTEGER PRIMARY KEY, restaurant_name TEXT NOT NULL UNIQUE, cuisine TEXT NOT NULL, city TEXT NOT NULL);
+CREATE TABLE orders (order_id INTEGER PRIMARY KEY, customer_id INTEGER NOT NULL, restaurant_id INTEGER NOT NULL, order_date TEXT NOT NULL, amount REAL NOT NULL CHECK(amount >= 0), status TEXT NOT NULL CHECK(status IN ('delivered','cancelled','pending')), delivery_minutes INTEGER CHECK(delivery_minutes IS NULL OR delivery_minutes > 0), FOREIGN KEY(customer_id) REFERENCES customers(customer_id), FOREIGN KEY(restaurant_id) REFERENCES restaurants(restaurant_id));
+CREATE TABLE restaurant_tags (tag_id INTEGER PRIMARY KEY, restaurant_id INTEGER NOT NULL, tag TEXT NOT NULL, FOREIGN KEY(restaurant_id) REFERENCES restaurants(restaurant_id), UNIQUE(restaurant_id,tag));
+CREATE INDEX idx_orders_date ON orders(order_date);
+CREATE INDEX idx_orders_customer ON orders(customer_id);
+CREATE INDEX idx_orders_restaurant ON orders(restaurant_id);
+CREATE INDEX idx_orders_status ON orders(status);
