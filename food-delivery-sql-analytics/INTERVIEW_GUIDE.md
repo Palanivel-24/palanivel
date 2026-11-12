@@ -26,6 +26,7 @@ This is the logical processing order, not necessarily the physical execution pla
 - UNION vs UNION ALL: UNION removes duplicate result rows; UNION ALL retains duplicates.
 - COUNT(*) vs COUNT(column): COUNT(*) counts rows; COUNT(column) ignores NULL values.
 - Index: can speed up lookups and joins, but uses storage and adds write overhead.
+- Currency precision: SQLite REAL is floating-point. For production financial data, store integer paise or use an exact-decimal data type in a suitable database.
 - Normalization: structures tables to reduce duplication and update anomalies.
 - Subquery: query nested inside another query.
 - CTE: named temporary result set defined with WITH for one statement.
@@ -51,6 +52,7 @@ This is the logical processing order, not necessarily the physical execution pla
 13. Preserve restaurants with zero delivered orders.
 14. Count statuses using CASE WHEN.
 15. Explain why joining orders to restaurant_tags can inflate revenue.
+16. Explain why floating-point REAL is not ideal for production money calculations.
 
 ## Query patterns
 Second-highest distinct amount:
